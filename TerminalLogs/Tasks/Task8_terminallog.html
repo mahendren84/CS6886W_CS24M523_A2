@@ -1,0 +1,335 @@
+<pre>(.venv) <font color="#26A269"><b>mahendranv@mahendranv</b></font>:<font color="#12488B"><b>~/cs6886w_a2</b></font>$ make task8
+mkdir -p /home/mahendranv/cs6886w_a2/perf_logs/task8
+=== Task 8: Scaling Benchmark — 1 threads ===
+sudo perf stat -e fp_arith_inst_retired.scalar_single,fp_arith_inst_retired.scalar_double,fp_arith_inst_retired.128b_packed_single,fp_arith_inst_retired.128b_packed_double,fp_arith_inst_retired.256b_packed_single,fp_arith_inst_retired.256b_packed_double,fp_arith_inst_retired.512b_packed_single,fp_arith_inst_retired.512b_packed_double,fp_arith_inst_retired.vector,uncore_imc_free_running/data_total/,LLC-load-misses,LLC-store-misses,LLC-misses,offcore_requests.demand_data_rd \
+	./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 1 \
+	| tee /home/mahendranv/cs6886w_a2/perf_logs/task8/task8_t1.txt
+| model                          |       size |     params | backend    | threads |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+| gpt2 0.4B F16                  | 679.38 MiB |   354.82 M | BLAS       |       1 |           tg256 |         26.32 ± 0.40 |
+
+build: 2376b7758 (7083)
+
+ Performance counter stats for &apos;./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 1&apos;:
+
+     1,503,767,114      fp_arith_inst_retired.scalar_single                                        (61.54%)
+        99,441,457      fp_arith_inst_retired.scalar_double                                        (61.53%)
+     1,033,891,821      fp_arith_inst_retired.128b_packed_single                                        (61.53%)
+                84      fp_arith_inst_retired.128b_packed_double                                        (61.53%)
+           612,374      fp_arith_inst_retired.256b_packed_single                                        (61.54%)
+           292,864      fp_arith_inst_retired.256b_packed_double                                        (61.54%)
+    60,945,685,016      fp_arith_inst_retired.512b_packed_single                                        (61.54%)
+                 0      fp_arith_inst_retired.512b_packed_double                                        (61.55%)
+    61,968,825,557      fp_arith_inst_retired.vector                                            (61.54%)
+   &lt;not supported&gt; MiB  uncore_imc_free_running/data_total/                                      
+     3,981,747,969      LLC-load-misses                                                         (61.54%)
+        34,583,445      LLC-store-misses                                                        (61.54%)
+     3,981,698,780      LLC-misses                                                              (61.54%)
+     4,336,218,226      offcore_requests.demand_data_rd                                         (61.54%)
+
+      48.786999120 seconds time elapsed
+
+      48.711081000 seconds user
+       0.062985000 seconds sys
+
+
+=== Task 8: Scaling Benchmark — 2 threads ===
+sudo perf stat -e fp_arith_inst_retired.scalar_single,fp_arith_inst_retired.scalar_double,fp_arith_inst_retired.128b_packed_single,fp_arith_inst_retired.128b_packed_double,fp_arith_inst_retired.256b_packed_single,fp_arith_inst_retired.256b_packed_double,fp_arith_inst_retired.512b_packed_single,fp_arith_inst_retired.512b_packed_double,fp_arith_inst_retired.vector,uncore_imc_free_running/data_total/,LLC-load-misses,LLC-store-misses,LLC-misses,offcore_requests.demand_data_rd \
+	./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 2 \
+	| tee /home/mahendranv/cs6886w_a2/perf_logs/task8/task8_t2.txt
+| model                          |       size |     params | backend    | threads |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+| gpt2 0.4B F16                  | 679.38 MiB |   354.82 M | BLAS       |       2 |           tg256 |         40.16 ± 0.96 |
+
+build: 2376b7758 (7083)
+
+ Performance counter stats for &apos;./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 2&apos;:
+
+     1,505,330,809      fp_arith_inst_retired.scalar_single                                        (61.54%)
+       100,216,848      fp_arith_inst_retired.scalar_double                                        (61.54%)
+     1,033,957,425      fp_arith_inst_retired.128b_packed_single                                        (61.54%)
+                91      fp_arith_inst_retired.128b_packed_double                                        (61.54%)
+                 0      fp_arith_inst_retired.256b_packed_single                                        (61.53%)
+                 0      fp_arith_inst_retired.256b_packed_double                                        (61.54%)
+    60,963,027,915      fp_arith_inst_retired.512b_packed_single                                        (61.54%)
+                 0      fp_arith_inst_retired.512b_packed_double                                        (61.54%)
+    61,975,353,598      fp_arith_inst_retired.vector                                            (61.54%)
+   &lt;not supported&gt; MiB  uncore_imc_free_running/data_total/                                      
+     3,349,863,332      LLC-load-misses                                                         (61.54%)
+        33,991,721      LLC-store-misses                                                        (61.54%)
+     3,347,591,812      LLC-misses                                                              (61.54%)
+     3,801,832,547      offcore_requests.demand_data_rd                                         (61.54%)
+
+      32.024886429 seconds time elapsed
+
+      63.815515000 seconds user
+       0.111967000 seconds sys
+
+
+=== Task 8: Scaling Benchmark — 4 threads ===
+sudo perf stat -e fp_arith_inst_retired.scalar_single,fp_arith_inst_retired.scalar_double,fp_arith_inst_retired.128b_packed_single,fp_arith_inst_retired.128b_packed_double,fp_arith_inst_retired.256b_packed_single,fp_arith_inst_retired.256b_packed_double,fp_arith_inst_retired.512b_packed_single,fp_arith_inst_retired.512b_packed_double,fp_arith_inst_retired.vector,uncore_imc_free_running/data_total/,LLC-load-misses,LLC-store-misses,LLC-misses,offcore_requests.demand_data_rd \
+	./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 4 \
+	| tee /home/mahendranv/cs6886w_a2/perf_logs/task8/task8_t4.txt
+| model                          |       size |     params | backend    | threads |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+| gpt2 0.4B F16                  | 679.38 MiB |   354.82 M | BLAS       |       4 |           tg256 |         49.38 ± 0.69 |
+
+build: 2376b7758 (7083)
+
+ Performance counter stats for &apos;./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 4&apos;:
+
+     1,500,800,463      fp_arith_inst_retired.scalar_single                                        (61.54%)
+       101,227,204      fp_arith_inst_retired.scalar_double                                        (61.54%)
+     1,033,903,981      fp_arith_inst_retired.128b_packed_single                                        (61.54%)
+                82      fp_arith_inst_retired.128b_packed_double                                        (61.54%)
+           579,185      fp_arith_inst_retired.256b_packed_single                                        (61.54%)
+                 0      fp_arith_inst_retired.256b_packed_double                                        (61.54%)
+    60,940,835,077      fp_arith_inst_retired.512b_packed_single                                        (61.54%)
+                 0      fp_arith_inst_retired.512b_packed_double                                        (61.54%)
+    61,960,385,932      fp_arith_inst_retired.vector                                            (61.54%)
+   &lt;not supported&gt; MiB  uncore_imc_free_running/data_total/                                      
+     3,211,538,937      LLC-load-misses                                                         (61.54%)
+        34,817,070      LLC-store-misses                                                        (61.54%)
+     3,209,850,984      LLC-misses                                                              (61.54%)
+     3,645,755,424      offcore_requests.demand_data_rd                                         (61.54%)
+
+      26.096841099 seconds time elapsed
+
+     103.903102000 seconds user
+       0.092992000 seconds sys
+
+
+=== Task 8: Scaling Benchmark — 8 threads ===
+sudo perf stat -e fp_arith_inst_retired.scalar_single,fp_arith_inst_retired.scalar_double,fp_arith_inst_retired.128b_packed_single,fp_arith_inst_retired.128b_packed_double,fp_arith_inst_retired.256b_packed_single,fp_arith_inst_retired.256b_packed_double,fp_arith_inst_retired.512b_packed_single,fp_arith_inst_retired.512b_packed_double,fp_arith_inst_retired.vector,uncore_imc_free_running/data_total/,LLC-load-misses,LLC-store-misses,LLC-misses,offcore_requests.demand_data_rd \
+	./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 8 \
+	| tee /home/mahendranv/cs6886w_a2/perf_logs/task8/task8_t8.txt
+| model                          |       size |     params | backend    | threads |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+| gpt2 0.4B F16                  | 679.38 MiB |   354.82 M | BLAS       |       8 |           tg256 |         45.34 ± 2.44 |
+
+build: 2376b7758 (7083)
+
+ Performance counter stats for &apos;./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 8&apos;:
+
+     1,501,207,968      fp_arith_inst_retired.scalar_single                                        (61.53%)
+       103,839,879      fp_arith_inst_retired.scalar_double                                        (61.54%)
+     1,034,087,040      fp_arith_inst_retired.128b_packed_single                                        (61.53%)
+                 9      fp_arith_inst_retired.128b_packed_double                                        (61.54%)
+           612,306      fp_arith_inst_retired.256b_packed_single                                        (61.54%)
+           292,868      fp_arith_inst_retired.256b_packed_double                                        (61.54%)
+    60,945,913,324      fp_arith_inst_retired.512b_packed_single                                        (61.54%)
+                 0      fp_arith_inst_retired.512b_packed_double                                        (61.55%)
+    61,928,437,735      fp_arith_inst_retired.vector                                            (61.55%)
+   &lt;not supported&gt; MiB  uncore_imc_free_running/data_total/                                      
+       653,363,679      LLC-load-misses                                                         (61.53%)
+        40,258,156      LLC-store-misses                                                        (61.55%)
+       653,455,747      LLC-misses                                                              (61.53%)
+     1,083,802,736      offcore_requests.demand_data_rd                                         (61.54%)
+
+      28.504212847 seconds time elapsed
+
+     222.042815000 seconds user
+       1.027246000 seconds sys
+
+
+=== Task 8: Scaling Benchmark — 12 threads ===
+sudo perf stat -e fp_arith_inst_retired.scalar_single,fp_arith_inst_retired.scalar_double,fp_arith_inst_retired.128b_packed_single,fp_arith_inst_retired.128b_packed_double,fp_arith_inst_retired.256b_packed_single,fp_arith_inst_retired.256b_packed_double,fp_arith_inst_retired.512b_packed_single,fp_arith_inst_retired.512b_packed_double,fp_arith_inst_retired.vector,uncore_imc_free_running/data_total/,LLC-load-misses,LLC-store-misses,LLC-misses,offcore_requests.demand_data_rd \
+	./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 12 \
+	| tee /home/mahendranv/cs6886w_a2/perf_logs/task8/task8_t12.txt
+| model                          |       size |     params | backend    | threads |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+| gpt2 0.4B F16                  | 679.38 MiB |   354.82 M | BLAS       |      12 |           tg256 |         21.23 ± 1.01 |
+
+build: 2376b7758 (7083)
+
+ Performance counter stats for &apos;./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 12&apos;:
+
+     1,497,188,714      fp_arith_inst_retired.scalar_single                                        (61.54%)
+       106,632,553      fp_arith_inst_retired.scalar_double                                        (61.53%)
+     1,033,814,985      fp_arith_inst_retired.128b_packed_single                                        (61.53%)
+                89      fp_arith_inst_retired.128b_packed_double                                        (61.53%)
+           612,336      fp_arith_inst_retired.256b_packed_single                                        (61.54%)
+           292,873      fp_arith_inst_retired.256b_packed_double                                        (61.54%)
+    60,986,683,318      fp_arith_inst_retired.512b_packed_single                                        (61.54%)
+                 0      fp_arith_inst_retired.512b_packed_double                                        (61.54%)
+    62,003,765,580      fp_arith_inst_retired.vector                                            (61.55%)
+   &lt;not supported&gt; MiB  uncore_imc_free_running/data_total/                                      
+       600,537,239      LLC-load-misses                                                         (61.54%)
+        40,954,882      LLC-store-misses                                                        (61.54%)
+       600,545,647      LLC-misses                                                              (61.54%)
+     1,055,460,966      offcore_requests.demand_data_rd                                         (61.54%)
+
+      60.686334581 seconds time elapsed
+
+     218.566116000 seconds user
+     258.779380000 seconds sys
+
+
+=== Task 8: Scaling Benchmark — 16 threads ===
+sudo perf stat -e fp_arith_inst_retired.scalar_single,fp_arith_inst_retired.scalar_double,fp_arith_inst_retired.128b_packed_single,fp_arith_inst_retired.128b_packed_double,fp_arith_inst_retired.256b_packed_single,fp_arith_inst_retired.256b_packed_double,fp_arith_inst_retired.512b_packed_single,fp_arith_inst_retired.512b_packed_double,fp_arith_inst_retired.vector,uncore_imc_free_running/data_total/,LLC-load-misses,LLC-store-misses,LLC-misses,offcore_requests.demand_data_rd \
+	./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 16 \
+	| tee /home/mahendranv/cs6886w_a2/perf_logs/task8/task8_t16.txt
+| model                          |       size |     params | backend    | threads |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+| gpt2 0.4B F16                  | 679.38 MiB |   354.82 M | BLAS       |      16 |           tg256 |         19.83 ± 0.27 |
+
+build: 2376b7758 (7083)
+
+ Performance counter stats for &apos;./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 16&apos;:
+
+     1,500,422,118      fp_arith_inst_retired.scalar_single                                        (61.55%)
+       109,431,298      fp_arith_inst_retired.scalar_double                                        (61.55%)
+     1,033,343,901      fp_arith_inst_retired.128b_packed_single                                        (61.55%)
+                 6      fp_arith_inst_retired.128b_packed_double                                        (61.53%)
+           612,452      fp_arith_inst_retired.256b_packed_single                                        (61.53%)
+           292,899      fp_arith_inst_retired.256b_packed_double                                        (61.53%)
+    61,007,347,837      fp_arith_inst_retired.512b_packed_single                                        (61.53%)
+                 0      fp_arith_inst_retired.512b_packed_double                                        (61.53%)
+    62,072,937,097      fp_arith_inst_retired.vector                                            (61.53%)
+   &lt;not supported&gt; MiB  uncore_imc_free_running/data_total/                                      
+       614,175,357      LLC-load-misses                                                         (61.54%)
+        40,832,712      LLC-store-misses                                                        (61.54%)
+       612,714,682      LLC-misses                                                              (61.55%)
+     1,079,490,634      offcore_requests.demand_data_rd                                         (61.55%)
+
+      64.883541454 seconds time elapsed
+
+     223.124606000 seconds user
+     291.614007000 seconds sys
+
+
+=== Task 8: Scaling Benchmark — 20 threads ===
+sudo perf stat -e fp_arith_inst_retired.scalar_single,fp_arith_inst_retired.scalar_double,fp_arith_inst_retired.128b_packed_single,fp_arith_inst_retired.128b_packed_double,fp_arith_inst_retired.256b_packed_single,fp_arith_inst_retired.256b_packed_double,fp_arith_inst_retired.512b_packed_single,fp_arith_inst_retired.512b_packed_double,fp_arith_inst_retired.vector,uncore_imc_free_running/data_total/,LLC-load-misses,LLC-store-misses,LLC-misses,offcore_requests.demand_data_rd \
+	./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 20 \
+	| tee /home/mahendranv/cs6886w_a2/perf_logs/task8/task8_t20.txt
+| model                          |       size |     params | backend    | threads |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+| gpt2 0.4B F16                  | 679.38 MiB |   354.82 M | BLAS       |      20 |           tg256 |         20.86 ± 0.79 |
+
+build: 2376b7758 (7083)
+
+ Performance counter stats for &apos;./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 20&apos;:
+
+     1,502,655,127      fp_arith_inst_retired.scalar_single                                        (61.54%)
+       112,564,014      fp_arith_inst_retired.scalar_double                                        (61.55%)
+     1,033,530,731      fp_arith_inst_retired.128b_packed_single                                        (61.55%)
+                13      fp_arith_inst_retired.128b_packed_double                                        (61.53%)
+           612,363      fp_arith_inst_retired.256b_packed_single                                        (61.54%)
+           292,848      fp_arith_inst_retired.256b_packed_double                                        (61.54%)
+    60,998,178,331      fp_arith_inst_retired.512b_packed_single                                        (61.54%)
+                 0      fp_arith_inst_retired.512b_packed_double                                        (61.53%)
+    62,039,564,501      fp_arith_inst_retired.vector                                            (61.53%)
+   &lt;not supported&gt; MiB  uncore_imc_free_running/data_total/                                      
+       617,708,063      LLC-load-misses                                                         (61.54%)
+        41,103,408      LLC-store-misses                                                        (61.53%)
+       617,606,703      LLC-misses                                                              (61.54%)
+     1,101,161,818      offcore_requests.demand_data_rd                                         (61.54%)
+
+      61.686268462 seconds time elapsed
+
+     219.111236000 seconds user
+     269.848440000 seconds sys
+
+
+=== Task 8: Scaling Benchmark — 24 threads ===
+sudo perf stat -e fp_arith_inst_retired.scalar_single,fp_arith_inst_retired.scalar_double,fp_arith_inst_retired.128b_packed_single,fp_arith_inst_retired.128b_packed_double,fp_arith_inst_retired.256b_packed_single,fp_arith_inst_retired.256b_packed_double,fp_arith_inst_retired.512b_packed_single,fp_arith_inst_retired.512b_packed_double,fp_arith_inst_retired.vector,uncore_imc_free_running/data_total/,LLC-load-misses,LLC-store-misses,LLC-misses,offcore_requests.demand_data_rd \
+	./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 24 \
+	| tee /home/mahendranv/cs6886w_a2/perf_logs/task8/task8_t24.txt
+| model                          |       size |     params | backend    | threads |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+| gpt2 0.4B F16                  | 679.38 MiB |   354.82 M | BLAS       |      24 |           tg256 |         18.16 ± 0.84 |
+
+build: 2376b7758 (7083)
+
+ Performance counter stats for &apos;./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 24&apos;:
+
+     1,505,286,999      fp_arith_inst_retired.scalar_single                                        (61.54%)
+       115,346,504      fp_arith_inst_retired.scalar_double                                        (61.54%)
+     1,033,387,403      fp_arith_inst_retired.128b_packed_single                                        (61.54%)
+                89      fp_arith_inst_retired.128b_packed_double                                        (61.54%)
+           612,369      fp_arith_inst_retired.256b_packed_single                                        (61.54%)
+           292,875      fp_arith_inst_retired.256b_packed_double                                        (61.54%)
+    61,053,697,216      fp_arith_inst_retired.512b_packed_single                                        (61.53%)
+                 0      fp_arith_inst_retired.512b_packed_double                                        (61.55%)
+    62,072,637,551      fp_arith_inst_retired.vector                                            (61.54%)
+   &lt;not supported&gt; MiB  uncore_imc_free_running/data_total/                                      
+       639,179,913      LLC-load-misses                                                         (61.55%)
+        41,198,605      LLC-store-misses                                                        (61.53%)
+       638,617,706      LLC-misses                                                              (61.53%)
+     1,158,729,066      offcore_requests.demand_data_rd                                         (61.54%)
+
+      70.922246175 seconds time elapsed
+
+     226.067897000 seconds user
+     336.464988000 seconds sys
+
+
+=== Task 8: Scaling Benchmark — 28 threads ===
+sudo perf stat -e fp_arith_inst_retired.scalar_single,fp_arith_inst_retired.scalar_double,fp_arith_inst_retired.128b_packed_single,fp_arith_inst_retired.128b_packed_double,fp_arith_inst_retired.256b_packed_single,fp_arith_inst_retired.256b_packed_double,fp_arith_inst_retired.512b_packed_single,fp_arith_inst_retired.512b_packed_double,fp_arith_inst_retired.vector,uncore_imc_free_running/data_total/,LLC-load-misses,LLC-store-misses,LLC-misses,offcore_requests.demand_data_rd \
+	./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 28 \
+	| tee /home/mahendranv/cs6886w_a2/perf_logs/task8/task8_t28.txt
+| model                          |       size |     params | backend    | threads |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+| gpt2 0.4B F16                  | 679.38 MiB |   354.82 M | BLAS       |      28 |           tg256 |         15.84 ± 0.42 |
+
+build: 2376b7758 (7083)
+
+ Performance counter stats for &apos;./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 28&apos;:
+
+     1,507,151,633      fp_arith_inst_retired.scalar_single                                        (61.54%)
+       118,187,294      fp_arith_inst_retired.scalar_double                                        (61.55%)
+     1,034,897,576      fp_arith_inst_retired.128b_packed_single                                        (61.55%)
+                89      fp_arith_inst_retired.128b_packed_double                                        (61.54%)
+           612,363      fp_arith_inst_retired.256b_packed_single                                        (61.54%)
+           292,850      fp_arith_inst_retired.256b_packed_double                                        (61.54%)
+    60,977,373,013      fp_arith_inst_retired.512b_packed_single                                        (61.53%)
+                 0      fp_arith_inst_retired.512b_packed_double                                        (61.53%)
+    61,967,830,599      fp_arith_inst_retired.vector                                            (61.53%)
+   &lt;not supported&gt; MiB  uncore_imc_free_running/data_total/                                      
+       619,921,083      LLC-load-misses                                                         (61.53%)
+        41,881,320      LLC-store-misses                                                        (61.53%)
+       620,055,536      LLC-misses                                                              (61.54%)
+     1,159,685,746      offcore_requests.demand_data_rd                                         (61.54%)
+
+      81.205517624 seconds time elapsed
+
+     238.872558000 seconds user
+     405.878407000 seconds sys
+
+
+=== Task 8: Scaling Benchmark — 32 threads ===
+sudo perf stat -e fp_arith_inst_retired.scalar_single,fp_arith_inst_retired.scalar_double,fp_arith_inst_retired.128b_packed_single,fp_arith_inst_retired.128b_packed_double,fp_arith_inst_retired.256b_packed_single,fp_arith_inst_retired.256b_packed_double,fp_arith_inst_retired.512b_packed_single,fp_arith_inst_retired.512b_packed_double,fp_arith_inst_retired.vector,uncore_imc_free_running/data_total/,LLC-load-misses,LLC-store-misses,LLC-misses,offcore_requests.demand_data_rd \
+	./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 32 \
+	| tee /home/mahendranv/cs6886w_a2/perf_logs/task8/task8_t32.txt
+| model                          |       size |     params | backend    | threads |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+| gpt2 0.4B F16                  | 679.38 MiB |   354.82 M | BLAS       |      32 |           tg256 |         11.98 ± 0.45 |
+
+build: 2376b7758 (7083)
+
+ Performance counter stats for &apos;./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 32&apos;:
+
+     1,506,450,833      fp_arith_inst_retired.scalar_single                                        (61.54%)
+       121,153,120      fp_arith_inst_retired.scalar_double                                        (61.54%)
+     1,034,987,102      fp_arith_inst_retired.128b_packed_single                                        (61.53%)
+                82      fp_arith_inst_retired.128b_packed_double                                        (61.54%)
+           612,378      fp_arith_inst_retired.256b_packed_single                                        (61.54%)
+           258,317      fp_arith_inst_retired.256b_packed_double                                        (61.54%)
+    60,957,793,910      fp_arith_inst_retired.512b_packed_single                                        (61.55%)
+                 0      fp_arith_inst_retired.512b_packed_double                                        (61.54%)
+    61,934,811,839      fp_arith_inst_retired.vector                                            (61.54%)
+   &lt;not supported&gt; MiB  uncore_imc_free_running/data_total/                                      
+       613,652,166      LLC-load-misses                                                         (61.54%)
+        42,149,410      LLC-store-misses                                                        (61.54%)
+       613,613,251      LLC-misses                                                              (61.53%)
+     1,201,002,959      offcore_requests.demand_data_rd                                         (61.54%)
+
+     107.293706190 seconds time elapsed
+
+     261.631867000 seconds user
+     584.035290000 seconds sys
+
+
+(.venv) <font color="#26A269"><b>mahendranv@mahendranv</b></font>:<font color="#12488B"><b>~/cs6886w_a2</b></font>$ 
+
+</pre>
