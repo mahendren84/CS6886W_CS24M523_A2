@@ -1,0 +1,54 @@
+  LLC-loads OR cpu/LLC-loads/
+  LLC-load-misses OR cpu/LLC-load-misses/
+  LLC-stores OR cpu/LLC-stores/
+  LLC-store-misses OR cpu/LLC-store-misses/
+  uncore_imc_free_running/data_read/                 [Kernel PMU event]
+  uncore_imc_free_running/data_total/                [Kernel PMU event]
+  uncore_imc_free_running/data_write/                [Kernel PMU event]
+  mem_inst_retired.all_loads
+  mem_inst_retired.all_stores
+  mem_inst_retired.any
+  mem_inst_retired.lock_loads
+  mem_inst_retired.split_loads
+  mem_inst_retired.split_stores
+  mem_inst_retired.stlb_miss_loads
+  mem_inst_retired.stlb_miss_stores
+  offcore_requests.all_data_rd
+  offcore_requests.all_requests
+  offcore_requests.demand_data_rd
+  offcore_requests.demand_rfo
+  offcore_requests_outstanding.all_data_rd
+  offcore_requests_outstanding.cycles_with_data_rd
+       [Cycles when offcore outstanding cacheable Core Data Read transactions
+  offcore_requests_outstanding.cycles_with_demand_data_rd
+       [Cycles when offcore outstanding Demand Data Read transactions are
+  offcore_requests_outstanding.cycles_with_demand_rfo
+       [Cycles with offcore outstanding demand rfo reads transactions in
+  offcore_requests_outstanding.demand_data_rd
+  offcore_requests_outstanding.demand_data_rd_ge_6
+       [Cycles with at least 6 offcore outstanding Demand Data Read
+  offcore_requests_outstanding.demand_rfo
+  fp_arith_inst_retired.128b_packed_double
+  fp_arith_inst_retired.128b_packed_single
+  fp_arith_inst_retired.256b_packed_double
+  fp_arith_inst_retired.256b_packed_single
+  fp_arith_inst_retired.4_flops
+  fp_arith_inst_retired.512b_packed_double
+  fp_arith_inst_retired.512b_packed_single
+  fp_arith_inst_retired.8_flops
+  fp_arith_inst_retired.scalar
+  fp_arith_inst_retired.scalar_double
+  fp_arith_inst_retired.scalar_single
+  fp_arith_inst_retired.vector
+  offcore_requests.l3_miss_demand_data_rd
+        DRAM. Unit: uncore_imc_free_running_0]
+        transfer to DRAM. Unit: uncore_imc_free_running_0]
+        from DRAM. Unit: uncore_imc_free_running_0]
+  tma_info_core_fp_arith_utilization
+  tma_info_core_fp_arith_utilization
+  tma_fp_arith
+  tma_info_core_fp_arith_utilization
+  tma_fp_arith
+  tma_fp_arith
+tma_fp_arith_group: [Metrics contributing to tma_fp_arith category]
+  tma_fp_arith
