@@ -1,5 +1,28 @@
 | model                          |       size |     params | backend    | threads |            test |                  t/s |
 | ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
-| gpt2 0.4B F16                  | 679.38 MiB |   354.82 M | CPU        |       1 |           tg256 |          2.78 ± 0.03 |
+| gpt2 0.4B F16                  | 679.38 MiB |   354.82 M | CPU        |       1 |           tg256 |          2.71 ± 0.01 |
 
 build: 2376b7758 (7083)
+
+ Performance counter stats for 'system wide':
+
+   469,087,276,187      fp_arith_inst_retired.scalar_single                                        (53.33%)
+   469,053,469,799      fp_arith_inst_retired.scalar_double                                        (53.33%)
+       996,215,876      fp_arith_inst_retired.128b_packed_single                                        (53.33%)
+         5,392,125      fp_arith_inst_retired.128b_packed_double                                        (53.33%)
+           303,946      fp_arith_inst_retired.256b_packed_single                                        (53.33%)
+                 0      fp_arith_inst_retired.256b_packed_double                                        (53.33%)
+                 0      fp_arith_inst_retired.512b_packed_single                                        (53.33%)
+                 0      fp_arith_inst_retired.512b_packed_double                                        (53.33%)
+     1,007,687,961      fp_arith_inst_retired.vector                                            (53.33%)
+     1,004,795,636      fp_arith_inst_retired.4_flops                                           (53.33%)
+           386,094      fp_arith_inst_retired.8_flops                                           (53.33%)
+      1,071,144.25 MiB  uncore_imc_free_running/data_read/                                      
+          8,936.52 MiB  uncore_imc_free_running/data_write/                                      
+      1,080,080.52 MiB  uncore_imc_free_running/data_total/                                      
+        69,372,997      LLC-load-misses                                                         (53.33%)
+        62,530,113      LLC-store-misses                                                        (53.33%)
+        69,826,630      LLC-misses                                                              (53.33%)
+       643,629,663      offcore_requests.demand_data_rd                                         (53.33%)
+
+     472.190762931 seconds time elapsed
