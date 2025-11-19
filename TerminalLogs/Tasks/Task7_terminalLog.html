@@ -1,0 +1,103 @@
+<pre>(.venv) <font color="#26A269"><b>mahendranv@mahendranv</b></font>:<font color="#12488B"><b>~/cs6886w_a2</b></font>$ make task7
+mkdir -p /home/mahendranv/cs6886w_a2/perf_logs/task7
+=== Task 7: Naive Build ===
+sudo perf stat -a -e fp_arith_inst_retired.scalar_single,fp_arith_inst_retired.scalar_double,fp_arith_inst_retired.128b_packed_single,fp_arith_inst_retired.128b_packed_double,fp_arith_inst_retired.256b_packed_single,fp_arith_inst_retired.256b_packed_double,fp_arith_inst_retired.512b_packed_single,fp_arith_inst_retired.512b_packed_double,fp_arith_inst_retired.vector,fp_arith_inst_retired.4_flops,fp_arith_inst_retired.8_flops,uncore_imc_free_running/data_read/,uncore_imc_free_running/data_write/,uncore_imc_free_running/data_total/,LLC-load-misses,LLC-store-misses,LLC-misses,offcore_requests.demand_data_rd \
+	./llama.cpp/build_task3/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 1 \
+	| tee /home/mahendranv/cs6886w_a2/perf_logs/task7/task7_naive.txt
+| model                          |       size |     params | backend    | threads |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+| gpt2 0.4B F16                  | 679.38 MiB |   354.82 M | CPU        |       1 |           tg256 |          2.71 ± 0.01 |
+
+build: 2376b7758 (7083)
+
+ Performance counter stats for &apos;system wide&apos;:
+
+   469,087,276,187      fp_arith_inst_retired.scalar_single                                        (53.33%)
+   469,053,469,799      fp_arith_inst_retired.scalar_double                                        (53.33%)
+       996,215,876      fp_arith_inst_retired.128b_packed_single                                        (53.33%)
+         5,392,125      fp_arith_inst_retired.128b_packed_double                                        (53.33%)
+           303,946      fp_arith_inst_retired.256b_packed_single                                        (53.33%)
+                 0      fp_arith_inst_retired.256b_packed_double                                        (53.33%)
+                 0      fp_arith_inst_retired.512b_packed_single                                        (53.33%)
+                 0      fp_arith_inst_retired.512b_packed_double                                        (53.33%)
+     1,007,687,961      fp_arith_inst_retired.vector                                            (53.33%)
+     1,004,795,636      fp_arith_inst_retired.4_flops                                           (53.33%)
+           386,094      fp_arith_inst_retired.8_flops                                           (53.33%)
+      1,071,144.25 MiB  uncore_imc_free_running/data_read/                                      
+          8,936.52 MiB  uncore_imc_free_running/data_write/                                      
+      1,080,080.52 MiB  uncore_imc_free_running/data_total/                                      
+        69,372,997      LLC-load-misses                                                         (53.33%)
+        62,530,113      LLC-store-misses                                                        (53.33%)
+        69,826,630      LLC-misses                                                              (53.33%)
+       643,629,663      offcore_requests.demand_data_rd                                         (53.33%)
+
+     472.190762931 seconds time elapsed
+
+=== Task 7: Default Build ===
+sudo perf stat -a -e fp_arith_inst_retired.scalar_single,fp_arith_inst_retired.scalar_double,fp_arith_inst_retired.128b_packed_single,fp_arith_inst_retired.128b_packed_double,fp_arith_inst_retired.256b_packed_single,fp_arith_inst_retired.256b_packed_double,fp_arith_inst_retired.512b_packed_single,fp_arith_inst_retired.512b_packed_double,fp_arith_inst_retired.vector,fp_arith_inst_retired.4_flops,fp_arith_inst_retired.8_flops,uncore_imc_free_running/data_read/,uncore_imc_free_running/data_write/,uncore_imc_free_running/data_total/,LLC-load-misses,LLC-store-misses,LLC-misses,offcore_requests.demand_data_rd \
+	./llama.cpp/build_task4/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 1 \
+	| tee /home/mahendranv/cs6886w_a2/perf_logs/task7/task7_default.txt
+| model                          |       size |     params | backend    | threads |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+| gpt2 0.4B F16                  | 679.38 MiB |   354.82 M | CPU        |       1 |           tg256 |         25.92 ± 0.04 |
+
+build: 2376b7758 (7083)
+
+ Performance counter stats for &apos;system wide&apos;:
+
+       643,324,463      fp_arith_inst_retired.scalar_single                                        (53.33%)
+        77,680,604      fp_arith_inst_retired.scalar_double                                        (53.33%)
+     1,034,316,773      fp_arith_inst_retired.128b_packed_single                                        (53.33%)
+             5,689      fp_arith_inst_retired.128b_packed_double                                        (53.33%)
+       608,201,158      fp_arith_inst_retired.256b_packed_single                                        (53.33%)
+                 0      fp_arith_inst_retired.256b_packed_double                                        (53.33%)
+    60,297,117,207      fp_arith_inst_retired.512b_packed_single                                        (53.34%)
+                 0      fp_arith_inst_retired.512b_packed_double                                        (53.34%)
+    61,930,736,917      fp_arith_inst_retired.vector                                            (53.34%)
+     1,033,619,823      fp_arith_inst_retired.4_flops                                           (53.34%)
+       608,112,862      fp_arith_inst_retired.8_flops                                           (53.34%)
+        910,415.23 MiB  uncore_imc_free_running/data_read/                                      
+          2,861.56 MiB  uncore_imc_free_running/data_write/                                      
+        913,277.20 MiB  uncore_imc_free_running/data_total/                                      
+     4,669,651,591      LLC-load-misses                                                         (53.34%)
+        33,496,696      LLC-store-misses                                                        (53.33%)
+     4,668,543,167      LLC-misses                                                              (53.33%)
+     5,090,917,952      offcore_requests.demand_data_rd                                         (53.33%)
+
+      49.538144595 seconds time elapsed
+
+=== Task 7: MKL Build ===
+sudo perf stat -a -e fp_arith_inst_retired.scalar_single,fp_arith_inst_retired.scalar_double,fp_arith_inst_retired.128b_packed_single,fp_arith_inst_retired.128b_packed_double,fp_arith_inst_retired.256b_packed_single,fp_arith_inst_retired.256b_packed_double,fp_arith_inst_retired.512b_packed_single,fp_arith_inst_retired.512b_packed_double,fp_arith_inst_retired.vector,fp_arith_inst_retired.4_flops,fp_arith_inst_retired.8_flops,uncore_imc_free_running/data_read/,uncore_imc_free_running/data_write/,uncore_imc_free_running/data_total/,LLC-load-misses,LLC-store-misses,LLC-misses,offcore_requests.demand_data_rd \
+	./llama.cpp/build_task5/bin/llama-bench -m ./gpt2-medium/gpt2-medium.gguf -p 0 -n 256 -t 1 \
+	| tee /home/mahendranv/cs6886w_a2/perf_logs/task7/task7_mkl.txt
+| model                          |       size |     params | backend    | threads |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+| gpt2 0.4B F16                  | 679.38 MiB |   354.82 M | BLAS       |       1 |           tg256 |         25.51 ± 0.19 |
+
+build: 2376b7758 (7083)
+
+ Performance counter stats for &apos;system wide&apos;:
+
+     1,500,740,738      fp_arith_inst_retired.scalar_single                                        (53.33%)
+        99,245,064      fp_arith_inst_retired.scalar_double                                        (53.33%)
+     1,034,233,217      fp_arith_inst_retired.128b_packed_single                                        (53.33%)
+             5,332      fp_arith_inst_retired.128b_packed_double                                        (53.33%)
+                 0      fp_arith_inst_retired.256b_packed_single                                        (53.33%)
+                 0      fp_arith_inst_retired.256b_packed_double                                        (53.33%)
+    60,945,894,402      fp_arith_inst_retired.512b_packed_single                                        (53.34%)
+                 0      fp_arith_inst_retired.512b_packed_double                                        (53.33%)
+    61,965,617,655      fp_arith_inst_retired.vector                                            (53.34%)
+     1,034,016,028      fp_arith_inst_retired.4_flops                                           (53.34%)
+           706,512      fp_arith_inst_retired.8_flops                                           (53.34%)
+        910,712.81 MiB  uncore_imc_free_running/data_read/                                      
+          2,678.59 MiB  uncore_imc_free_running/data_write/                                      
+        913,391.51 MiB  uncore_imc_free_running/data_total/                                      
+     3,350,126,226      LLC-load-misses                                                         (53.33%)
+        32,058,579      LLC-store-misses                                                        (53.34%)
+     3,355,741,531      LLC-misses                                                              (53.33%)
+     3,809,609,262      offcore_requests.demand_data_rd                                         (53.33%)
+
+      50.351316869 seconds time elapsed
+
+(.venv) <font color="#26A269"><b>mahendranv@mahendranv</b></font>:<font color="#12488B"><b>~/cs6886w_a2</b></font>$ 
+</pre>
